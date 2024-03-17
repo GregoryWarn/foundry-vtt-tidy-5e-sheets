@@ -35,6 +35,8 @@
   .item-name {
     flex: 1 1 0.0625rem;
     min-width: 0;
+    padding: 0.125rem 0;
+    flex-wrap: wrap;
 
     &:not(.has-children) {
       align-self: center;

@@ -76,7 +76,9 @@ Hooks.once('init', () => {
       label: 'TIDY5E.Tidy5eContainerSheet',
     }
   );
+});
 
+Hooks.once('setup', () => {
   initSettings();
   initRuntime();
 });

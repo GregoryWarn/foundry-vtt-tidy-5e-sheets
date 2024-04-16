@@ -24,6 +24,7 @@ declare global {
   var Dialog: any;
   var dnd5e: any;
   var DocumentSheet: any;
+  var DocumentSheetV2: any;
   var DocumentSheetConfig: any;
   var expandObject: any;
   var FilePicker: any;

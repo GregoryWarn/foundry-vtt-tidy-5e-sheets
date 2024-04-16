@@ -1,11 +1,35 @@
-export default function SvelteApplicationMixin<
-  T extends new (...args: any[]) => {}
->(BaseApplication: T) {
-    class SvelteApplication extends BaseApplication {
-        // TODO: implement `_renderFrame` and other Svelte Application Base pieces derived from src\applications\SvelteFormApplicationBase.ts
-    }
-}
+import type { SvelteComponent } from 'svelte';
 
+export default function SvelteApplicationMixin<
+  T extends new (...args: any[]) => {} & any
+>(BaseApplication: T) {
+  abstract class SvelteApplication extends BaseApplication {
+    // TODO: implement `_renderFrame` and other Svelte Application Base pieces derived from src\applications\SvelteFormApplicationBase.ts
+
+    svelteRoot?: SvelteComponent;
+
+    abstract createComponent(node: HTMLElement): SvelteComponent;
+
+    async _renderFrame(options: any): Promise<HTMLElement> {
+      const element = await super._renderFrame(options);
+      const target = this.hasFrame
+        ? element.querySelector('.window-content')
+        : element;
+      this.svelteRoot = this.createComponent(target);
+      return element;
+    }
+
+    async _renderHTML(context: any, options: any) {
+      console.log({ context, options });
+    }
+
+    _replaceHTML(result: any, content: any, options: any) {
+      console.log({ result, content, options });
+    }
+  }
+
+  return SvelteApplication;
+}
 
 /*
 Notes:

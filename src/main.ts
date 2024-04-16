@@ -13,6 +13,7 @@ import MigrationNotificationFormApplication from './applications/migrations/noti
 import { MigrationTally } from './applications/migrations/MigrationTally';
 import { Tidy5eKgarContainerSheet } from './sheets/Tidy5eContainerSheet';
 import { setupModuleIntegrations } from './integration/integration';
+import UserConfigPrototypeSheet from './sheets/prototype/UserConfigPrototypeSheet';
 
 Hooks.once('init', () => {
   DocumentSheetConfig.registerSheet(
@@ -104,4 +105,9 @@ Hooks.once('ready', async () => {
   ) {
     new MigrationNotificationFormApplication().render(true);
   }
+});
+
+// DEBUG
+Hooks.once('ready', () => {
+  new UserConfigPrototypeSheet({ document: game.user }).render(true);
 });
